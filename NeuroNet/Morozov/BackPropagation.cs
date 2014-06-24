@@ -9,11 +9,11 @@ namespace NeuroNet.Morozov
 {
     public class BackPropagation : StudyWithTeacher
     {
-        NeuronNetwork network = new NeuronNetwork();
+        
 
         public void SetNetwork(NeuronNetwork network)
         {
-            this.network = network;
+            neuronNetwork = network;
         }
 
         public void BackpropagationError()
@@ -21,7 +21,7 @@ namespace NeuroNet.Morozov
             double currentError = Single.MaxValue; // текущая ошибка
             double lastError = 0; // последняя ошибка
             int epochNumber = 0; // номер эпохи
-            StudyAlgorithm options = new StudyAlgorithm();
+            StudyAlgorithm options = new StudyAlgorithm(); // ЗАЧЕМ ЭТО???  ты же наследуешь от этого класаа!!!!!!!!!
             
 
             do
@@ -53,21 +53,42 @@ namespace NeuroNet.Morozov
                 epochNumber++;
             }
             while (epochNumber < options.maximumEpochs && currentError > options.MinError &&
-                     Math.Abs(currentError - lastError) > options.MinErrorChange);
+                        Math.Abs(currentError - lastError) > options.MinErrorChange);
         }
 
-        public Synapse InitializeWeight(NeuronNetwork net)
+        /// <summary>
+        ///  инициализирует веса нейронов случайными числами в диапазоне [0, 1]
+        /// </summary>
+        public void InitializationWeights()
         {
             Random rand = new Random();
 
-            foreach (Neuron neuron in net.inputLayer.Neurons())
+            NeuronLayer inputLayer = neuronNetwork.InputLayer();
+            List<NeuronLayer> hiddenLayers;
+
+            foreach (Neuron neuron in inputLayer.Neurons())
             {
-                for (int j = 0; j < net.inputLayer.Neurons().Count; j++)
+                foreach (Synapse output in neuron.Outputs())
                 {
-                    neuron.Inputs()[j].SetWeight(rand.NextDouble());
+                    output.SetWeight(rand.NextDouble());
                 }
             }
-            return new Synapse();
+
+            hiddenLayers = neuronNetwork.HiddenLayers();
+
+            foreach(NeuronLayer layer in hiddenLayers)
+            {
+                foreach(Neuron neuron in layer.Neurons())
+                {
+                    foreach(Synapse output in neuron.Outputs())
+                    {
+                        output.SetWeight(rand.NextDouble());
+                    }
+                }
+            }
+
         }
+
+        
     }
 }

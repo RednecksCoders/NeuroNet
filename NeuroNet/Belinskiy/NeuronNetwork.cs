@@ -10,21 +10,10 @@ namespace NeuroNet.Belinskiy
     /// </summary>
     public class NeuronNetwork
     {
-        private NeuronLayer InputLayer = new NeuronLayer();// входной слой сети
+        private NeuronLayer inputLayer = new NeuronLayer();// входной слой сети
         private NeuronLayer outputLayer = new NeuronLayer(); // выходной слой сети
         private List<NeuronLayer> hiddenLayers = new List<NeuronLayer>(); // список скрытых слоев сети
-        
-        public NeuronLayer inputLayer
-        {
-            set
-            {
-                InputLayer = value;
-            }
-            get
-            {
-                return InputLayer;
-            }
-        }
+
 
         public NeuronNetwork()
         {
@@ -70,6 +59,21 @@ namespace NeuroNet.Belinskiy
         public void AddHiddenLayer(NeuronLayer layer)
         {
             hiddenLayers.Add(layer);
+        }
+
+        public NeuronLayer InputLayer()
+        {
+            return inputLayer;
+        }
+
+        public NeuronLayer OutputLayer()
+        {
+            return outputLayer;
+        }
+
+        public List<NeuronLayer> HiddenLayers()
+        {
+            return hiddenLayers;
         }
     }       
         

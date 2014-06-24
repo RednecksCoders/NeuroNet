@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using NeuroNet.Belinskiy;
+
 namespace NeuroNet.Morozov
 {
     public class StudyAlgorithm
     {
+       // нейронная сеть
+        public NeuronNetwork neuronNetwork = new NeuronNetwork;
+
         // максимальное колво эпох
         public int maximumEpochs { get; set; }
 
