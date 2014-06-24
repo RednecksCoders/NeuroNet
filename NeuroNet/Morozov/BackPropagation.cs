@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using NeuroNet.Belinskiy;
+
+namespace NeuroNet.Morozov
+{
+    public class BackPropagation : StudyWithTeacher
+    {
+        NeuronNetwork network = new NeuronNetwork();
+
+        public void SetNetwork(NeuronNetwork network)
+        {
+            this.network = network;
+        }
+
+        public void BackpropagationError()
+        {
+            double currentError = Single.MaxValue; // текущая ошибка
+            double lastError = 0; // последняя ошибка
+            int epochNumber = 0; // номер эпохи
+            StudyAlgorithm options = new StudyAlgorithm();
+            
+
+            do
+            {
+                lastError = currentError;
+
+                int currentIndex = 0; // текущий индекс
+
+                // эпоха
+                do
+                {
+                    foreach(float point in pointX)
+                    {
+
+                    }
+                    // Вычислить разность между выходом сети и требуемым выходом (целевым вектором обучающей пары).
+                    // Подкорректировать веса сети для минимизации ошибки 
+
+                } while (currentIndex < pointX.Count); //вместо 0 количество данных
+
+                // пересчет ошибки currentError на всех данных 
+                currentError = 0;
+                for (int i = 0; i < 0; i++)
+                {
+                    // ....
+                }
+                currentError *= 1d / pointX.Count;
+
+                epochNumber++;
+            }
+            while (epochNumber < options.maximumEpochs && currentError > options.MinError &&
+                     Math.Abs(currentError - lastError) > options.MinErrorChange);
+        }
+
+        public Synapse InitializeWeight(NeuronNetwork net)
+        {
+            Random rand = new Random();
+
+            foreach (Neuron neuron in net.inputLayer.Neurons())
+            {
+                for (int j = 0; j < net.inputLayer.Neurons().Count; j++)
+                {
+                    neuron.Inputs()[j].SetWeight(rand.NextDouble());
+                }
+            }
+            return new Synapse();
+        }
+    }
+}

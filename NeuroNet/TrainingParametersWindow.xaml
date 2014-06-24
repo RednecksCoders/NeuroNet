@@ -1,0 +1,36 @@
+﻿<Window x:Class="NeuroNet.TrainingParametersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{DynamicResource VS2012Style}"
+        Title="NetworkParametersWindow" Height="168.038" Width="262.631" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <Grid Margin="0,0,-4,-4">
+        <Border BorderThickness="1" Background="#FFE4A827" Margin="-1,-1,2,0" VerticalAlignment="Top" Height="24"/>
+        <GroupBox x:Name="TrainingParameters" Header="Параметры обучения" Margin="5,28,10,0" VerticalAlignment="Top" Height="84">
+            <Grid >
+                <Label Content="Шаг обучения :" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="LearningStep" HorizontalAlignment="Left" Height="23" Margin="124,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Text="0,9"/>
+                <Label Content="Количество эпох :" HorizontalAlignment="Left" Margin="6,36,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="NumberOfEpochs" Margin="124,33,16,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="3000"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="CloseButton" Style="{DynamicResource WinStyleTitleBarButton}" Background="{x:Null}" BorderBrush="#FF0A0606" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="20" Margin="0,0,3,0" Click="CloseButton_Click" >
+            <Grid   >
+                <Path RenderOptions.EdgeMode="Aliased" Data="M3.1666667,22.166667 L29.166667,2.5 M3.1666667,22.166667 L29.166667,2.5" Fill="White" HorizontalAlignment="Center" Height="10" Margin="5.914,5.373,4.086,6.627" Stretch="Fill" Stroke="Black" VerticalAlignment="Center" Width="10" StrokeThickness="2"/>
+                <Path RenderOptions.EdgeMode="Aliased" Data="M3.1666667,22.166667 L29.166667,2.5" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10" Margin="4.83,4.749,0,0" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="10" RenderTransformOrigin="0.5,0.5" StrokeThickness="2">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90.196"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Button>
+        <Button x:Name="useButton" Content="Применить" HorizontalAlignment="Left" Margin="165,0,0,15" VerticalAlignment="Bottom" Width="71" Height="20" IsDefault="True" Click="use_Button_Click"/>
+
+
+    </Grid>
+</Window>
