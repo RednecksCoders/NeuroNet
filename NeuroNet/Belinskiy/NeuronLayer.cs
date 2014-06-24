@@ -53,11 +53,8 @@ namespace NeuroNet.Belinskiy
             {
                 //double activationPotential = neuron.GetActivationPotential();
                 //neuron.Outputs()[0].SetSignal(neuron.GetSignal());
-                neuron.SetActivationFunction(new LinearFunction());
-
                 foreach(Synapse output in neuron.Outputs())
                 {
-                    output.SetWeight(1);
                     output.SetSignal(neuron.GetSignal());
                 }
             }

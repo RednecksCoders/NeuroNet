@@ -19,10 +19,7 @@ namespace NeuroNet.Belinskiy
         private double shift; // смещение нейрона
         private Function activationFunction; // активационная функция, применяемая к нейрону
 
-        public Neuron()
-        {
-            setName();
-        }
+       
         public Neuron(Function activationFunction)
         {
             setName();

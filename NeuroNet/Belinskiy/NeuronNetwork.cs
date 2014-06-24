@@ -21,21 +21,48 @@ namespace NeuroNet.Belinskiy
         }
 
         // задать входной сигнал сети
-        //public  void SetSignal(List<double> inputSignal)
-        //{
-        //    foreach(Neuron neuron in inputLayer.Neurons())
-        //    {
-        //        for (int i = 0; i < inputSignal.Count; i++ )
-        //        {
-        //            neuron.Inputs()[0].SetSignal(inputSignal[i]);
-        //        }
-        //    }
-        //}
+        public void SetSignal(List<double> inputSignal)
+        {
+            int numInput = 0;
+
+            foreach (Neuron neuron in inputLayer.Neurons())
+            {
+                foreach (Synapse input in neuron.Inputs())
+                {
+                    input.SetSignal(inputSignal[numInput]);
+                    numInput++;
+                }
+            }
+                
+        }
 
         // получить выходной сигнал сети
         public  List<double> GetSignal()
         {
-                    
+            List<double> outputSignal;
+
+            NeuronLayer layer = inputLayer;
+            layer.Transfer();
+
+            if (hiddenLayers.Count > 0)
+            {
+                foreach(NeuronLayer hiddenLayer in hiddenLayers)
+                {
+                    hiddenLayer.Transfer();
+                }
+            }
+
+            outputLayer.Transfer();
+
+            outputSignal = new List<double>();
+
+            foreach(Neuron outputNeuron in outputLayer.Neurons())
+            {
+                foreach(Synapse output in outputNeuron.Outputs())
+                {
+                    outputSignal.Add(output.GetSignal());  // ВЕС НА ВЫХОДНЫХ СИНАПСАХ НАДО УТОЧНИТЬ
+                }
+            }
 
             return new List<double>(); // возвратить ВЫХОД СЕТИ  А НЕ ВХОДНОЙ СИГНАЛ  !!!!!!!  НЕЗАБУДЬ КОДЕР!!!!!!!!!!!!
         }

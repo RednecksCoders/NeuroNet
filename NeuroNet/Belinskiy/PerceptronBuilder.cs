@@ -14,18 +14,18 @@ namespace NeuroNet.Belinskiy
 
         public override NeuronLayer CreateInputLayer(int countNeurons, List<double> inputSignal)
         {
-            if (inputSignal.Count == countNeurons)
-            {
+            //if (inputSignal.Count == countNeurons)
+            //{
                 NeuronLayer layer = new NeuronLayer();
 
                 for (int i = 0; i < countNeurons; i++)
                 {
                     Synapse synapse = new Synapse();
-                    Neuron neuron = new Neuron();
+                    Neuron neuron = new Neuron(new LinearFunction());
 
-                    synapse.SetSignal(inputSignal[i]);
-                    synapse.SetWeight(1);
-                    neuron.SetShift(0);
+                    //synapse.SetSignal(inputSignal[i]);
+                    //synapse.SetWeight(1);
+                    //neuron.SetShift(0);
 
                     synapse.SetParentNeurons(null, neuron);
                     
@@ -37,12 +37,12 @@ namespace NeuroNet.Belinskiy
                 network.SetInputLayer(layer);
 
                 return layer;
-            }
-            else
-            {
-                MessageBox.Show("lol ... countNeurons не равно signal.Count");
-                return null;
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("lol ... countNeurons не равно signal.Count");
+            //    return null;
+            //}
         }
 
         public override NeuronLayer CreateOutputLayer(int countNeurons)
@@ -51,7 +51,7 @@ namespace NeuroNet.Belinskiy
 
             for (int i = 0; i < countNeurons; i++)
             {
-                Neuron neuron = new Neuron();
+                Neuron neuron = new Neuron(new SigmoidFunction());
                 Synapse synapse = new Synapse();
 
                 synapse.SetParentNeurons(neuron, null);
@@ -71,7 +71,7 @@ namespace NeuroNet.Belinskiy
 
             for (int i=0; i<countNeurons; i++)
             {
-                Neuron newNeuron = new Neuron();
+                Neuron newNeuron = new Neuron(new SigmoidFunction());
                 
                 layer.AddNeuron(newNeuron);
             }

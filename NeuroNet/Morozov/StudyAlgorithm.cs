@@ -10,7 +10,7 @@ namespace NeuroNet.Morozov
     public class StudyAlgorithm
     {
        // нейронная сеть
-        public NeuronNetwork neuronNetwork = new NeuronNetwork;
+        public NeuronNetwork neuronNetwork = new NeuronNetwork();
 
         // максимальное колво эпох
         public int maximumEpochs { get; set; }
