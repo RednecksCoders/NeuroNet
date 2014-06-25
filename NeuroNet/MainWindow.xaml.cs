@@ -109,9 +109,13 @@ namespace NeuroNet
                 archtecture.CountHiddenLayers = Convert.ToInt32(networkParameters.countHiddenLayer.Text);
                 archtecture.CountNeuronsInLayer = Convert.ToInt32(networkParameters.countNeuronsInHiddenLayer.Text);
 
-                perceptron.Create(generateSignal(2), archtecture);
-                perceptron.NeuronNetwork().SetSignal(clearSignal);
+                perceptron.Create(clearSignal, archtecture);
                 points.SetNetwork(perceptron.NeuronNetwork());
+                points.InitializationWeights();
+
+                List<double> output = perceptron.NeuronNetwork().GetSignal();
+
+                int hh;
             }
         }
 

@@ -14,6 +14,7 @@ namespace NeuroNet.Belinskiy
         private NeuronLayer outputLayer = new NeuronLayer(); // выходной слой сети
         private List<NeuronLayer> hiddenLayers = new List<NeuronLayer>(); // список скрытых слоев сети
 
+        List<double> signal = new List<double>();
 
         public NeuronNetwork()
         {
@@ -24,7 +25,7 @@ namespace NeuroNet.Belinskiy
         public void SetSignal(List<double> inputSignal)
         {
             int numInput = 0;
-
+            
             foreach (Neuron neuron in inputLayer.Neurons())
             {
                 foreach (Synapse input in neuron.Inputs())
@@ -49,6 +50,7 @@ namespace NeuroNet.Belinskiy
                 foreach(NeuronLayer hiddenLayer in hiddenLayers)
                 {
                     hiddenLayer.Transfer();
+                    int hh;
                 }
             }
 
@@ -64,7 +66,7 @@ namespace NeuroNet.Belinskiy
                 }
             }
 
-            return new List<double>(); // возвратить ВЫХОД СЕТИ  А НЕ ВХОДНОЙ СИГНАЛ  !!!!!!!  НЕЗАБУДЬ КОДЕР!!!!!!!!!!!!
+            return outputSignal; 
         }
 
         

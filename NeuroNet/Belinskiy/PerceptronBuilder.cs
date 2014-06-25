@@ -12,7 +12,7 @@ namespace NeuroNet.Belinskiy
         {
         }
 
-        public override NeuronLayer CreateInputLayer(int countNeurons, List<double> inputSignal)
+        public override NeuronLayer CreateInputLayer(int countNeurons)
         {
             //if (inputSignal.Count == countNeurons)
             //{
@@ -24,8 +24,8 @@ namespace NeuroNet.Belinskiy
                     Neuron neuron = new Neuron(new LinearFunction());
 
                     //synapse.SetSignal(inputSignal[i]);
-                    //synapse.SetWeight(1);
-                    //neuron.SetShift(0);
+                    synapse.SetWeight(1);
+                    neuron.SetShift(0);
 
                     synapse.SetParentNeurons(null, neuron);
                     
@@ -53,6 +53,8 @@ namespace NeuroNet.Belinskiy
             {
                 Neuron neuron = new Neuron(new SigmoidFunction());
                 Synapse synapse = new Synapse();
+                
+                synapse.SetWeight(1);
 
                 synapse.SetParentNeurons(neuron, null);
                 neuron.AddOutput(synapse);
@@ -90,27 +92,31 @@ namespace NeuroNet.Belinskiy
         {
             
 
-            NeuronLayer inputLayer = CreateInputLayer(architecture.CountInputNeurons, signal);
-            NeuronLayer hiddenLayer1 = AddHiddenLayer(2);
-            NeuronLayer hiddenLayer2 = AddHiddenLayer(2);
+            NeuronLayer layer = CreateInputLayer(architecture.CountInputNeurons);
+            NeuronLayer hidLayer = null;
+
+            for (int i = 0; i < architecture.CountHiddenLayers; i++ )
+            {
+                hidLayer = AddHiddenLayer(architecture.CountNeuronsInLayer);
+                layer.ConnectLayer(hidLayer);
+                layer = hidLayer;
+            }
+            
+ 
+
+            //NeuronLayer hiddenLayer1 = AddHiddenLayer(2);
+            //NeuronLayer hiddenLayer2 = AddHiddenLayer(2);
             NeuronLayer outputLayer = CreateOutputLayer(architecture.CountOutputNeurons);
+            layer.ConnectLayer(outputLayer);
+            
 
-          //  network.SetSignal(signal);
+            //inputLayer.ConnectLayer(outputLayer);
 
-            inputLayer.ConnectLayer(hiddenLayer1);
-            hiddenLayer1.ConnectLayer(hiddenLayer2);
-            hiddenLayer2.ConnectLayer(outputLayer);
+            //inputLayer.ConnectLayer(hiddenLayer1);
+            //hiddenLayer1.ConnectLayer(hiddenLayer2);
+            //hiddenLayer1.ConnectLayer(outputLayer);
 
-
-
-            activationFunction = new SigmoidFunction();
-
-            inputLayer.Transfer();
-            hiddenLayer1.Transfer();
-            hiddenLayer2.Transfer();
-            outputLayer.Transfer();
-
-            int hh;
+            network.SetSignal(signal);
         }
 
 

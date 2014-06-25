@@ -16,7 +16,7 @@ namespace NeuroNet.Belinskiy
         protected List<double> inputSignal = new List<double>(); // входной сигнал
         protected Function activationFunction;
 
-        public abstract NeuronLayer CreateInputLayer(int countNeurons, List<double> inputSignal); // создать входной слой
+        public abstract NeuronLayer CreateInputLayer(int countNeurons); // создать входной слой
 
         public abstract NeuronLayer CreateOutputLayer(int countNeurons); // создать выходной слой
 
