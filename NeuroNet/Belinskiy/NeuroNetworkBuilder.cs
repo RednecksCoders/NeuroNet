@@ -22,7 +22,7 @@ namespace NeuroNet.Belinskiy
 
         public abstract NeuronLayer AddHiddenLayer(int countNeurons); // добавить скрытый слой
 
-        public abstract void Create(List<double> signal, NeuronNetworkArchitecture architecture); // создать сеть
+        public abstract void Create(NeuronNetworkArchitecture architecture); // создать сеть
 
         public virtual NeuronNetwork NeuronNetwork()
         {

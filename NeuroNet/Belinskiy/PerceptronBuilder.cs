@@ -88,7 +88,7 @@ namespace NeuroNet.Belinskiy
         /// </summary>
         /// <param name="signal">входной сигнал перцептрона</param>
         /// <param name="architecture">информация об структуре сети</param>
-        public override void Create(List<double> signal, NeuronNetworkArchitecture architecture)
+        public override void Create(NeuronNetworkArchitecture architecture)
         {
             
 
@@ -116,7 +116,6 @@ namespace NeuroNet.Belinskiy
             //hiddenLayer1.ConnectLayer(hiddenLayer2);
             //hiddenLayer1.ConnectLayer(outputLayer);
 
-            network.SetSignal(signal);
         }
 
 

@@ -70,7 +70,7 @@ namespace NeuroNet
                 p.Add(new Point(parser.Calculate(), i));
             }
                   
-
+            
             chart.DataContext = p;
         }
 
@@ -109,11 +109,22 @@ namespace NeuroNet
                 archtecture.CountHiddenLayers = Convert.ToInt32(networkParameters.countHiddenLayer.Text);
                 archtecture.CountNeuronsInLayer = Convert.ToInt32(networkParameters.countNeuronsInHiddenLayer.Text);
 
-                perceptron.Create(clearSignal, archtecture);
+                perceptron.Create(archtecture);
                 points.SetNetwork(perceptron.NeuronNetwork());
                 points.InitializationWeights();
 
-                List<double> output = perceptron.NeuronNetwork().GetSignal();
+                for (int i = 0; i < clearSignal.Count; i++ )
+                {
+                    List<List<double>> tmp = new List<List<double>>();
+                    List<double> sig = new List<double>();
+                    sig.Add(clearSignal[i]);
+                    tmp.Add(sig);
+                    perceptron.NeuronNetwork().SetSignal(tmp[0]);
+                    List<double> output = perceptron.NeuronNetwork().GetSignal();
+                    
+                }
+                
+                
 
                 int hh;
             }
